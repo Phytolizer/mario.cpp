@@ -1,5 +1,6 @@
 #pragma once
 
+#include "jade/Camera.hpp"
 #include "jade/Scene.hpp"
 #include "renderer/Shader.hpp"
 #include <array>
@@ -32,11 +33,11 @@ struct LevelEditorScene : Scene
     int m_fragmentId;
     int m_shaderProgram;
     static constexpr std::array vertexArray = {
-        // position         // color
-        0.5F,  -0.5F, 0.0F, 1.0F, 0.0F, 0.0F, 1.0F, // Bottom right
-        -0.5F, 0.5F,  0.0F, 0.0F, 1.0F, 0.0F, 1.0F, // Top left
-        0.5F,  0.5F,  0.0F, 0.0F, 0.0F, 1.0F, 1.0F, // Top right
-        -0.5F, -0.5F, 0.0F, 1.0F, 1.0F, 0.0F, 1.0F, // Bottom left
+        // position           // color
+        50.5F,  -50.5F, 0.0F, 1.0F, 0.0F, 0.0F, 1.0F, // Bottom right
+        -50.5F, 50.5F,  0.0F, 0.0F, 1.0F, 0.0F, 1.0F, // Top left
+        50.5F,  50.5F,  0.0F, 0.0F, 0.0F, 1.0F, 1.0F, // Top right
+        -50.5F, -50.5F, 0.0F, 1.0F, 1.0F, 0.0F, 1.0F, // Bottom left
     };
     static constexpr std::array elementArray = {
         2, 1, 0, // Top right triangle
@@ -47,6 +48,7 @@ struct LevelEditorScene : Scene
     unsigned int m_eboId;
 
     Shader m_defaultShader;
+    Camera m_camera;
 
   public:
     LevelEditorScene();

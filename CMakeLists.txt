@@ -81,6 +81,7 @@ target_link_libraries(
 
 add_library(
     "jade"
+    "src/jade/Camera.cpp"
     "src/jade/KeyListener.cpp"
     "src/jade/LevelEditorScene.cpp"
     "src/jade/LevelScene.cpp"

@@ -2,6 +2,7 @@
 #include "fmt/core.h"
 #include <fstream>
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include <util/Regex.hpp>
 
@@ -131,4 +132,10 @@ void Shader::use()
 void Shader::detach()
 {
     glUseProgram(0);
+}
+
+void Shader::uploadMat4(std::string_view uniformName, glm::mat4 matrix)
+{
+    int uniformLocation = glGetUniformLocation(m_shaderProgramId, uniformName.data());
+    glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(matrix));
 }

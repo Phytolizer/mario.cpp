@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <vector>
 
-LevelEditorScene::LevelEditorScene() : m_defaultShader("res/shaders/default.glsl")
+LevelEditorScene::LevelEditorScene() : m_defaultShader("res/shaders/default.glsl"), m_camera(glm::vec2{})
 {
 }
 
@@ -46,6 +46,8 @@ void LevelEditorScene::update(float dt)
 {
     // Bind shader program
     m_defaultShader.use();
+    m_defaultShader.uploadMat4("uProjection", m_camera.getProjectionMatrix());
+    m_defaultShader.uploadMat4("uView", m_camera.getViewMatrix());
 
     // Bind VAO
     glBindVertexArray(m_vaoId);

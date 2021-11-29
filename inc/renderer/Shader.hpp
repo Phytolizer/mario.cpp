@@ -1,5 +1,6 @@
 #pragma once
 
+#include <glm/glm.hpp>
 #include <string_view>
 
 struct Shader
@@ -16,4 +17,6 @@ struct Shader
     void compile();
     void use();
     void detach();
+
+    void uploadMat4(std::string_view uniformName, glm::mat4 matrix);
 };
