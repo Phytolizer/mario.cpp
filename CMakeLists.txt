@@ -11,12 +11,11 @@ project(
 include(FetchContent)
 
 FetchContent_Declare(
-    "SDL"
-    GIT_REPOSITORY "https://github.com/libsdl-org/SDL.git"
-    GIT_TAG "release-2.0.16"
+    "glfw"
+    GIT_REPOSITORY "https://github.com/glfw/glfw"
+    GIT_TAG "3.3.5"
 )
-option(SDL_SHARED OFF)
-FetchContent_MakeAvailable("SDL")
+FetchContent_MakeAvailable("glfw")
 
 FetchContent_Declare(
     "nativefiledialog"
@@ -26,6 +25,20 @@ FetchContent_Declare(
 FetchContent_MakeAvailable("nativefiledialog")
 
 add_subdirectory("3rd/glad")
+add_subdirectory("3rd/stb")
+
+add_library(
+    "jade"
+    "src/jade/Window.cpp"
+)
+target_include_directories(
+    "jade"
+    PUBLIC "${PROJECT_SOURCE_DIR}/inc"
+)
+target_link_libraries(
+    "jade"
+    PUBLIC "glfw" "glad"
+)
 
 add_library(
     "physics"
@@ -42,5 +55,5 @@ add_executable(
 )
 target_link_libraries(
     "mario"
-    PRIVATE "SDL2-static" "glad" "nativefiledialog"
+    PRIVATE "nativefiledialog" "jade"
 )
