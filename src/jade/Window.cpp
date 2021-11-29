@@ -114,10 +114,12 @@ void Window::changeScene(int scene)
     case 0:
         s_currentScene = std::make_unique<LevelEditorScene>();
         s_currentScene->init();
+        s_currentScene->start();
         break;
     case 1:
         s_currentScene = std::make_unique<LevelScene>();
         s_currentScene->init();
+        s_currentScene->start();
         break;
     default:
         throw std::runtime_error{fmt::format("Unknown scene '{}'", scene)};

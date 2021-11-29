@@ -2,17 +2,24 @@
 #include "jade/KeyListener.hpp"
 #include "jade/Window.hpp"
 #include "renderer/Shader.hpp"
+#include <components/FontRenderer.hpp>
+#include <components/SpriteRenderer.hpp>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
 
 LevelEditorScene::LevelEditorScene()
-    : m_defaultShader("res/shaders/default.glsl"), m_testTexture("res/images/testImage.png"), m_camera(glm::vec2{})
+    : m_defaultShader("res/shaders/default.glsl"), m_testTexture("res/images/testImage.png"), m_camera(glm::vec2{}),
+      m_testObj(std::make_unique<GameObject>("test object")), m_firstTime(true)
 {
 }
 
 void LevelEditorScene::init()
 {
+    std::cout << "Creating 'test object'\n";
+    m_testObj->addComponent<SpriteRenderer>(ComponentClass::SPRITE_RENDERER);
+    m_testObj->addComponent<FontRenderer>(ComponentClass::FONT_RENDERER);
+    addGameObject(std::move(m_testObj));
     // Compile and link shaders
     m_defaultShader.compile();
 
@@ -73,4 +80,18 @@ void LevelEditorScene::update(float dt)
     glBindVertexArray(0);
     m_testTexture.unbind();
     m_defaultShader.detach();
+
+    if (m_firstTime)
+    {
+        std::cout << "Creating gameObject!\n";
+        auto go = std::make_unique<GameObject>("Game Test 2");
+        go->addComponent<SpriteRenderer>(ComponentClass::SPRITE_RENDERER);
+        addGameObject(std::move(go));
+        m_firstTime = false;
+    }
+
+    for (auto& gameObject : m_gameObjects)
+    {
+        gameObject->update(dt);
+    }
 }

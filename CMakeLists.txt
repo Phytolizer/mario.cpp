@@ -86,6 +86,8 @@ target_link_libraries(
 add_library(
     "jade"
     "src/jade/Camera.cpp"
+    "src/jade/Component.cpp"
+    "src/jade/GameObject.cpp"
     "src/jade/KeyListener.cpp"
     "src/jade/LevelEditorScene.cpp"
     "src/jade/LevelScene.cpp"
@@ -103,6 +105,20 @@ target_link_libraries(
 )
 
 add_library(
+    "components"
+    "src/components/FontRenderer.cpp"
+    "src/components/SpriteRenderer.cpp"
+)
+target_include_directories(
+    "components"
+    PUBLIC "${PROJECT_SOURCE_DIR}/inc"
+)
+target_link_libraries(
+    "components"
+    PUBLIC "jade"
+)
+
+add_library(
     "physics"
     "src/physics/whatever.cpp"
 )
@@ -117,7 +133,7 @@ add_executable(
 )
 target_link_libraries(
     "mario"
-    PRIVATE "nativefiledialog" "jade"
+    PRIVATE "components" "jade" "nativefiledialog"
 )
 set_target_properties(
     "mario"

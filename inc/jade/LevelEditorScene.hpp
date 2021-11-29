@@ -1,6 +1,7 @@
 #pragma once
 
 #include "jade/Camera.hpp"
+#include "jade/Component.hpp"
 #include "jade/Scene.hpp"
 #include "renderer/Shader.hpp"
 #include "renderer/Texture.hpp"
@@ -28,6 +29,8 @@ struct LevelEditorScene : Scene
     Shader m_defaultShader;
     Texture m_testTexture;
     Camera m_camera;
+    std::unique_ptr<GameObject> m_testObj;
+    bool m_firstTime;
 
   public:
     LevelEditorScene();
