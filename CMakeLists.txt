@@ -18,11 +18,17 @@ FetchContent_Declare(
 option(SDL_SHARED OFF)
 FetchContent_MakeAvailable("SDL")
 
+add_subdirectory("3rd/glad")
+
 add_library(
     "physics"
     "src/physics/whatever.cpp"
 )
 target_link_libraries(
     "physics"
-    PUBLIC "SDL"
+    PUBLIC "SDL2-static" "glad"
+)
+target_include_directories(
+    "physics"
+    PUBLIC "${PROJECT_SOURCE_DIR}/inc"
 )
