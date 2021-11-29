@@ -18,17 +18,29 @@ FetchContent_Declare(
 option(SDL_SHARED OFF)
 FetchContent_MakeAvailable("SDL")
 
+FetchContent_Declare(
+    "nativefiledialog"
+    GIT_REPOSITORY "https://github.com/Phytolizer/nativefiledialog.git"
+    GIT_TAG "master"
+)
+FetchContent_MakeAvailable("nativefiledialog")
+
 add_subdirectory("3rd/glad")
 
 add_library(
     "physics"
     "src/physics/whatever.cpp"
 )
-target_link_libraries(
-    "physics"
-    PUBLIC "SDL2-static" "glad"
-)
 target_include_directories(
     "physics"
     PUBLIC "${PROJECT_SOURCE_DIR}/inc"
+)
+
+add_executable(
+    "mario"
+    "src/mario/main.cpp"
+)
+target_link_libraries(
+    "mario"
+    PRIVATE "SDL2-static" "glad" "nativefiledialog"
 )
