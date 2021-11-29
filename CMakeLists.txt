@@ -40,6 +40,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable("pcre")
 
+FetchContent_Declare(
+    "glm"
+    GIT_REPOSITORY "https://github.com/g-truc/glm.git"
+    GIT_TAG "0.9.9.8"
+)
+FetchContent_MakeAvailable("glm")
+
 add_subdirectory("3rd/glad")
 add_subdirectory("3rd/stb")
 
@@ -69,7 +76,7 @@ target_include_directories(
 )
 target_link_libraries(
     "renderer"
-    PUBLIC "glad" "util"
+    PUBLIC "glad" "glm" "util"
 )
 
 add_library(
