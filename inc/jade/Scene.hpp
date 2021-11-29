@@ -3,6 +3,7 @@
 struct Scene
 {
     Scene() = default;
+    virtual ~Scene() = default;
 
     virtual void init();
 
