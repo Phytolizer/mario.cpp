@@ -51,6 +51,7 @@ add_library(
     "src/jade/LevelEditorScene.cpp"
     "src/jade/LevelScene.cpp"
     "src/jade/MouseListener.cpp"
+    "src/jade/Scene.cpp"
     "src/jade/Window.cpp"
 )
 target_include_directories(
