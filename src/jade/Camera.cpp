@@ -1,7 +1,7 @@
 #include "jade/Camera.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 
-Camera::Camera(glm::vec2 position) : m_position(position), m_projectionMatrix(0), m_viewMatrix(0)
+Camera::Camera(glm::vec2 position) : m_projectionMatrix(0), m_viewMatrix(0), m_position(position)
 {
     adjustProjection();
 }
