@@ -23,6 +23,8 @@ void Window::run()
 {
     init();
     loop();
+    glfwDestroyWindow(m_glfwWindow);
+    glfwTerminate();
 }
 
 void Window::init()
