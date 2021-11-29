@@ -1,12 +1,14 @@
 #include "jade/LevelEditorScene.hpp"
 #include "jade/KeyListener.hpp"
 #include "jade/Window.hpp"
+#include "renderer/Shader.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <vector>
 
 LevelEditorScene::LevelEditorScene()
 {
+    Shader testShader{"res/shaders/default.glsl"};
 }
 
 void LevelEditorScene::init()

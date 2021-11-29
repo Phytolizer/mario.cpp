@@ -33,16 +33,43 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable("fmt")
 
+FetchContent_Declare(
+    "pcre"
+    GIT_REPOSITORY "https://github.com/Phytolizer/pcre2.git"
+    GIT_TAG "phyto-1.0"
+)
+FetchContent_MakeAvailable("pcre")
+
 add_subdirectory("3rd/glad")
 add_subdirectory("3rd/stb")
 
 add_library(
     "util"
+    "src/util/Regex.cpp"
+    "src/util/RegexMatch.cpp"
+    "src/util/RegexMatchData.cpp"
     "src/util/Time.cpp"
 )
 target_include_directories(
     "util"
     PUBLIC "${PROJECT_SOURCE_DIR}/inc"
+)
+target_link_libraries(
+    "util"
+    PUBLIC "pcre2-8" "fmt"
+)
+
+add_library(
+    "renderer"
+    "src/renderer/Shader.cpp"
+)
+target_include_directories(
+    "renderer"
+    PUBLIC "${PROJECT_SOURCE_DIR}/inc"
+)
+target_link_libraries(
+    "renderer"
+    PUBLIC "util"
 )
 
 add_library(
@@ -60,7 +87,7 @@ target_include_directories(
 )
 target_link_libraries(
     "jade"
-    PUBLIC "fmt" "glad" "glfw" "util"
+    PUBLIC "fmt" "glad" "glfw" "renderer" "util"
 )
 
 add_library(
@@ -79,4 +106,9 @@ add_executable(
 target_link_libraries(
     "mario"
     PRIVATE "nativefiledialog" "jade"
+)
+set_target_properties(
+    "mario"
+    PROPERTIES
+    VS_DEBUGGER_WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
 )
