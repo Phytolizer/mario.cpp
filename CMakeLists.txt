@@ -29,6 +29,8 @@ add_subdirectory("3rd/stb")
 
 add_library(
     "jade"
+    "src/jade/KeyListener.cpp"
+    "src/jade/MouseListener.cpp"
     "src/jade/Window.cpp"
 )
 target_include_directories(

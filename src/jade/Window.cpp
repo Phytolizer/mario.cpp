@@ -1,4 +1,6 @@
 #include "jade/Window.hpp"
+#include "jade/KeyListener.hpp"
+#include "jade/MouseListener.hpp"
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <stdexcept>
@@ -51,6 +53,11 @@ void Window::init()
         throw std::runtime_error{"Failed to create the GLFW window"};
     }
 
+    glfwSetCursorPosCallback(m_glfwWindow, MouseListener::mousePosCallback);
+    glfwSetMouseButtonCallback(m_glfwWindow, MouseListener::mouseButtonCallback);
+    glfwSetScrollCallback(m_glfwWindow, MouseListener::mouseScrollCallback);
+    glfwSetKeyCallback(m_glfwWindow, KeyListener::keyCallback);
+
     // Make the OpenGL context current
     glfwMakeContextCurrent(m_glfwWindow);
     // Enable VSync
@@ -68,7 +75,7 @@ void Window::loop()
     {
         glfwPollEvents();
 
-        glClearColor(1.0F, 0.0F, 0.0F, 1.0F);
+        glClearColor(1.0F, 1.0F, 1.0F, 1.0F);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glfwSwapBuffers(m_glfwWindow);
