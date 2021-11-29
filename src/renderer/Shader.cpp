@@ -1,6 +1,7 @@
 #include "renderer/Shader.hpp"
 #include "fmt/core.h"
 #include <fstream>
+#include <glad/glad.h>
 #include <iostream>
 #include <util/Regex.hpp>
 
@@ -54,4 +55,80 @@ Shader::Shader(std::string_view filePath) : m_filePath(filePath)
     std::cout << m_vertexSource << std::endl;
     std::cout << "=============== FRAGMENT ================" << std::endl;
     std::cout << m_fragmentSource << std::endl;
+}
+
+void Shader::compile()
+{
+    // Load and compile the vertex shader
+    int vertexId = glCreateShader(GL_VERTEX_SHADER);
+    const char* vertexShaderSource = m_vertexSource.c_str();
+    glShaderSource(vertexId, 1, &vertexShaderSource, nullptr);
+    glCompileShader(vertexId);
+    // Check for errors in compilation
+    int success;
+    glGetShaderiv(vertexId, GL_COMPILE_STATUS, &success);
+    if (success == GL_FALSE)
+    {
+        int infoLogLength;
+        glGetShaderiv(vertexId, GL_INFO_LOG_LENGTH, &infoLogLength);
+        std::vector<char> infoLog(infoLogLength);
+        glGetShaderInfoLog(vertexId, infoLogLength, nullptr, infoLog.data());
+        std::string infoLogString(infoLog.begin(), infoLog.end());
+        std::cerr << "ERROR: '" << m_filePath << "'\n\nVertex shader compilation failed.\n";
+        std::cerr << infoLogString << std::endl;
+        throw std::runtime_error{"Failed to compile the vertex shader"};
+    }
+
+    // Load and compile the fragment shader
+    int fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
+    const char* fragmentShaderSource = m_fragmentSource.c_str();
+    glShaderSource(fragmentId, 1, &fragmentShaderSource, nullptr);
+    glCompileShader(fragmentId);
+    // Check for errors in compilation
+    glGetShaderiv(fragmentId, GL_COMPILE_STATUS, &success);
+    if (success == GL_FALSE)
+    {
+        int infoLogLength;
+        glGetShaderiv(fragmentId, GL_INFO_LOG_LENGTH, &infoLogLength);
+        std::vector<char> infoLog(infoLogLength);
+        glGetShaderInfoLog(fragmentId, infoLogLength, nullptr, infoLog.data());
+        std::string infoLogString(infoLog.begin(), infoLog.end());
+        std::cerr << "ERROR: '" << m_filePath << "'\n\nFragment shader compilation failed.\n";
+        std::cerr << infoLogString << std::endl;
+        throw std::runtime_error{"Failed to compile the fragment shader"};
+    }
+
+    // Link shaders
+    m_shaderProgramId = glCreateProgram();
+    glAttachShader(m_shaderProgramId, vertexId);
+    glAttachShader(m_shaderProgramId, fragmentId);
+    glLinkProgram(m_shaderProgramId);
+
+    // Check for errors in linking
+    glGetProgramiv(m_shaderProgramId, GL_LINK_STATUS, &success);
+    if (success == GL_FALSE)
+    {
+        int infoLogLength;
+        glGetProgramiv(m_shaderProgramId, GL_INFO_LOG_LENGTH, &infoLogLength);
+        std::vector<char> infoLog(infoLogLength);
+        glGetProgramInfoLog(m_shaderProgramId, infoLogLength, nullptr, infoLog.data());
+        std::string infoLogString(infoLog.begin(), infoLog.end());
+        std::cerr << "ERROR: '" << m_filePath << "'\n\nLinking shaders failed.\n";
+        std::cerr << infoLogString << std::endl;
+        throw std::runtime_error{"Failed to link the shaders"};
+    }
+
+    // Clean up shaders
+    glDeleteShader(vertexId);
+    glDeleteShader(fragmentId);
+}
+
+void Shader::use()
+{
+    glUseProgram(m_shaderProgramId);
+}
+
+void Shader::detach()
+{
+    glUseProgram(0);
 }

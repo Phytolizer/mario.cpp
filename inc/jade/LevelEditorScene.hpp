@@ -1,6 +1,7 @@
 #pragma once
 
 #include "jade/Scene.hpp"
+#include "renderer/Shader.hpp"
 #include <array>
 #include <string>
 
@@ -44,6 +45,8 @@ struct LevelEditorScene : Scene
     unsigned int m_vaoId;
     unsigned int m_vboId;
     unsigned int m_eboId;
+
+    Shader m_defaultShader;
 
   public:
     LevelEditorScene();

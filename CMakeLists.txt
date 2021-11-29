@@ -69,7 +69,7 @@ target_include_directories(
 )
 target_link_libraries(
     "renderer"
-    PUBLIC "util"
+    PUBLIC "glad" "util"
 )
 
 add_library(
@@ -87,7 +87,7 @@ target_include_directories(
 )
 target_link_libraries(
     "jade"
-    PUBLIC "fmt" "glad" "glfw" "renderer" "util"
+    PUBLIC "fmt" "glfw" "renderer" "util"
 )
 
 add_library(
