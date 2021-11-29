@@ -19,4 +19,5 @@ struct Shader
     void detach();
 
     void uploadMat4(std::string_view uniformName, glm::mat4 matrix);
+    void uploadTexture(std::string_view textureName, unsigned int slot);
 };

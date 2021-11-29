@@ -6,7 +6,8 @@
 #include <stdexcept>
 #include <vector>
 
-LevelEditorScene::LevelEditorScene() : m_defaultShader("res/shaders/default.glsl"), m_camera(glm::vec2{})
+LevelEditorScene::LevelEditorScene()
+    : m_defaultShader("res/shaders/default.glsl"), m_testTexture("res/images/testImage.png"), m_camera(glm::vec2{})
 {
 }
 
@@ -34,18 +35,25 @@ void LevelEditorScene::init()
     // Add vertex attribute pointers
     constexpr size_t positionsSize = 3;
     constexpr size_t colorSize = 4;
+    constexpr size_t uvSize = 2;
     constexpr size_t floatSizeBytes = sizeof(float);
-    constexpr size_t vertexSizeBytes = (positionsSize + colorSize) * floatSizeBytes;
+    constexpr size_t vertexSizeBytes = (positionsSize + colorSize + uvSize) * floatSizeBytes;
     glVertexAttribPointer(0, positionsSize, GL_FLOAT, GL_FALSE, vertexSizeBytes, nullptr);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, colorSize, GL_FLOAT, GL_FALSE, vertexSizeBytes, (void*)(positionsSize * floatSizeBytes));
     glEnableVertexAttribArray(1);
+    glVertexAttribPointer(2, uvSize, GL_FLOAT, GL_FALSE, vertexSizeBytes,
+                          (void*)((positionsSize + colorSize) * floatSizeBytes));
+    glEnableVertexAttribArray(2);
 }
 
 void LevelEditorScene::update(float dt)
 {
     // Bind shader program
     m_defaultShader.use();
+    m_defaultShader.uploadTexture("TEX_SAMPLER", 0);
+    glActiveTexture(GL_TEXTURE0);
+    m_testTexture.bind();
     m_defaultShader.uploadMat4("uProjection", m_camera.getProjectionMatrix());
     m_defaultShader.uploadMat4("uView", m_camera.getViewMatrix());
 
@@ -63,5 +71,6 @@ void LevelEditorScene::update(float dt)
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glBindVertexArray(0);
+    m_testTexture.unbind();
     m_defaultShader.detach();
 }

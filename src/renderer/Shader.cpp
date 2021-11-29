@@ -139,3 +139,10 @@ void Shader::uploadMat4(std::string_view uniformName, glm::mat4 matrix)
     int uniformLocation = glGetUniformLocation(m_shaderProgramId, uniformName.data());
     glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(matrix));
 }
+
+void Shader::uploadTexture(std::string_view textureName, unsigned int slot)
+{
+    int uniformLocation = glGetUniformLocation(m_shaderProgramId, textureName.data());
+    use();
+    glUniform1i(uniformLocation, slot);
+}

@@ -50,7 +50,7 @@ FetchContent_MakeAvailable("glm")
 add_subdirectory("3rd/glad")
 add_subdirectory("3rd/stb")
 
-# list(APPEND CMAKE_CXX_FLAGS "-Wall")
+list(APPEND CMAKE_CXX_FLAGS "-Wall")
 
 add_library(
     "util"
@@ -71,6 +71,8 @@ target_link_libraries(
 add_library(
     "renderer"
     "src/renderer/Shader.cpp"
+    "src/renderer/stb_image.cpp"
+    "src/renderer/Texture.cpp"
 )
 target_include_directories(
     "renderer"
@@ -78,7 +80,7 @@ target_include_directories(
 )
 target_link_libraries(
     "renderer"
-    PUBLIC "glad" "glm" "util"
+    PUBLIC "glad" "glm" "stb" "util"
 )
 
 add_library(

@@ -3,21 +3,19 @@
 #include "jade/Camera.hpp"
 #include "jade/Scene.hpp"
 #include "renderer/Shader.hpp"
+#include "renderer/Texture.hpp"
 #include <array>
 #include <string>
 
 struct LevelEditorScene : Scene
 {
   private:
-    int m_vertexId;
-    int m_fragmentId;
-    int m_shaderProgram;
     static constexpr std::array vertexArray = {
-        // position           // color
-        100.5F, 0.5F,   0.0F, 1.0F, 0.0F, 0.0F, 1.0F, // Bottom right
-        0.5F,   100.5F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, // Top left
-        100.5F, 100.5F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, // Top right
-        0.5F,   0.5F,   0.0F, 1.0F, 1.0F, 0.0F, 1.0F, // Bottom left
+        // position           // color                // UV Coordinates
+        100.0F, 0.0F,   0.0F, 1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F, // Bottom right
+        0.0F,   100.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, 0.0F, 0.0F, // Top left
+        100.0F, 100.0F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F, 0.0F, // Top right
+        0.0F,   0.0F,   0.0F, 1.0F, 1.0F, 0.0F, 1.0F, 0.0F, 1.0F, // Bottom left
     };
     static constexpr std::array elementArray = {
         2, 1, 0, // Top right triangle
@@ -28,6 +26,7 @@ struct LevelEditorScene : Scene
     unsigned int m_eboId;
 
     Shader m_defaultShader;
+    Texture m_testTexture;
     Camera m_camera;
 
   public:
