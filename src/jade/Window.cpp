@@ -65,6 +65,10 @@ void Window::loop()
     while (!glfwWindowShouldClose(m_glfwWindow))
     {
         glfwPollEvents();
+
+        glClearColor(1.0F, 0.0F, 0.0F, 1.0F);
+        glClear(GL_COLOR_BUFFER_BIT);
+
         glfwSwapBuffers(m_glfwWindow);
     }
 }
