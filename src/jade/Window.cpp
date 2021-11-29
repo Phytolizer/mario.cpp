@@ -1,8 +1,13 @@
 #include "jade/Window.hpp"
 #include "jade/KeyListener.hpp"
+#include "jade/LevelEditorScene.hpp"
+#include "jade/LevelScene.hpp"
 #include "jade/MouseListener.hpp"
+#include "util/Time.hpp"
 #include <GLFW/glfw3.h>
+#include <fmt/format.h>
 #include <iostream>
+#include <memory>
 #include <stdexcept>
 
 static void error_callback(int error, const char* description)
@@ -11,8 +16,9 @@ static void error_callback(int error, const char* description)
 }
 
 Window Window::s_window;
+std::unique_ptr<Scene> Window::s_currentScene;
 
-Window::Window() : m_width(1920), m_height(1080), m_title("Mario")
+Window::Window() : m_width(1920), m_height(1080), m_title("Mario"), r(1.0F), g(1.0F), b(1.0F)
 {
 }
 
@@ -67,17 +73,51 @@ void Window::init()
     glfwShowWindow(m_glfwWindow);
 
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+
+    changeScene(0);
 }
 
 void Window::loop()
 {
+    float beginTime = Time::getTime();
+    float endTime = Time::getTime();
+    float dt = -1.0F;
+
     while (!glfwWindowShouldClose(m_glfwWindow))
     {
         glfwPollEvents();
 
-        glClearColor(1.0F, 1.0F, 1.0F, 1.0F);
+        glClearColor(r, g, b, 1.0F);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        if (dt == 0)
+        {
+            dt = FLT_EPSILON;
+        }
+        if (dt > 0)
+        {
+            s_currentScene->update(dt);
+        }
+
         glfwSwapBuffers(m_glfwWindow);
+
+        endTime = Time::getTime();
+        dt = endTime - beginTime;
+        beginTime = endTime;
+    }
+}
+
+void Window::changeScene(int scene)
+{
+    switch (scene)
+    {
+    case 0:
+        s_currentScene = std::make_unique<LevelEditorScene>();
+        break;
+    case 1:
+        s_currentScene = std::make_unique<LevelScene>();
+        break;
+    default:
+        throw std::runtime_error{fmt::format("Unknown scene '{}'", scene)};
     }
 }

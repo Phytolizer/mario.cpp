@@ -8,6 +8,8 @@ project(
     HOMEPAGE_URL "https://github.com/Phytolizer/physics.cpp"
 )
 
+set(CMAKE_CXX_STANDARD 20)
+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -24,12 +26,30 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable("nativefiledialog")
 
+FetchContent_Declare(
+    "fmt"
+    GIT_REPOSITORY "https://github.com/fmtlib/fmt.git"
+    GIT_TAG "8.0.1"
+)
+FetchContent_MakeAvailable("fmt")
+
 add_subdirectory("3rd/glad")
 add_subdirectory("3rd/stb")
 
 add_library(
+    "util"
+    "src/util/Time.cpp"
+)
+target_include_directories(
+    "util"
+    PUBLIC "${PROJECT_SOURCE_DIR}/inc"
+)
+
+add_library(
     "jade"
     "src/jade/KeyListener.cpp"
+    "src/jade/LevelEditorScene.cpp"
+    "src/jade/LevelScene.cpp"
     "src/jade/MouseListener.cpp"
     "src/jade/Window.cpp"
 )
@@ -39,7 +59,7 @@ target_include_directories(
 )
 target_link_libraries(
     "jade"
-    PUBLIC "glfw" "glad"
+    PUBLIC "fmt" "glad" "glfw" "util"
 )
 
 add_library(
