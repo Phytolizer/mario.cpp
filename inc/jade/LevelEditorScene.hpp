@@ -34,10 +34,10 @@ struct LevelEditorScene : Scene
     int m_shaderProgram;
     static constexpr std::array vertexArray = {
         // position           // color
-        50.5F,  -50.5F, 0.0F, 1.0F, 0.0F, 0.0F, 1.0F, // Bottom right
-        -50.5F, 50.5F,  0.0F, 0.0F, 1.0F, 0.0F, 1.0F, // Top left
-        50.5F,  50.5F,  0.0F, 0.0F, 0.0F, 1.0F, 1.0F, // Top right
-        -50.5F, -50.5F, 0.0F, 1.0F, 1.0F, 0.0F, 1.0F, // Bottom left
+        100.5F, 0.5F,   0.0F, 1.0F, 0.0F, 0.0F, 1.0F, // Bottom right
+        0.5F,   100.5F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F, // Top left
+        100.5F, 100.5F, 0.0F, 0.0F, 0.0F, 1.0F, 1.0F, // Top right
+        0.5F,   0.5F,   0.0F, 1.0F, 1.0F, 0.0F, 1.0F, // Bottom left
     };
     static constexpr std::array elementArray = {
         2, 1, 0, // Top right triangle
