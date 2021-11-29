@@ -27,6 +27,11 @@ Window& Window::get()
     return s_window;
 }
 
+Scene& Window::getScene()
+{
+    return *s_currentScene;
+}
+
 void Window::run()
 {
     init();

@@ -29,5 +29,6 @@ class Window
 
     static void changeScene(int scene);
     static Window& get();
+    static Scene& getScene();
     void run();
 };

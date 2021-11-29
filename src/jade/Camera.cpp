@@ -20,7 +20,7 @@ glm::mat4 Camera::getViewMatrix()
     return m_viewMatrix;
 }
 
-glm::mat4 Camera::getProjectionMatrix()
+const glm::mat4& Camera::getProjectionMatrix() const
 {
     return m_projectionMatrix;
 }

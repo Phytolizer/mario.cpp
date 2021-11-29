@@ -70,6 +70,8 @@ target_link_libraries(
 
 add_library(
     "renderer"
+    "src/renderer/RenderBatch.cpp"
+    "src/renderer/Renderer.cpp"
     "src/renderer/Shader.cpp"
     "src/renderer/stb_image.cpp"
     "src/renderer/Texture.cpp"
@@ -80,7 +82,7 @@ target_include_directories(
 )
 target_link_libraries(
     "renderer"
-    PUBLIC "glad" "glm" "stb" "util"
+    PUBLIC "glad" "glfw" "glm" "stb" "util"
 )
 
 add_library(
@@ -93,6 +95,7 @@ add_library(
     "src/jade/LevelScene.cpp"
     "src/jade/MouseListener.cpp"
     "src/jade/Scene.cpp"
+    "src/jade/Transform.cpp"
     "src/jade/Window.cpp"
 )
 target_include_directories(
@@ -101,7 +104,7 @@ target_include_directories(
 )
 target_link_libraries(
     "jade"
-    PUBLIC "fmt" "glfw" "renderer" "util"
+    PUBLIC "fmt" "renderer" "util"
 )
 
 add_library(

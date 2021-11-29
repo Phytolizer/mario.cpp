@@ -12,7 +12,7 @@ std::unique_ptr<Component> Component::make(ComponentClass componentClass, GameOb
     switch (componentClass)
     {
     case ComponentClass::SPRITE_RENDERER:
-        return std::make_unique<SpriteRenderer>(go);
+        return std::make_unique<SpriteRenderer>(go, glm::vec4{});
     case ComponentClass::FONT_RENDERER:
         return std::make_unique<FontRenderer>(go);
     }

@@ -2,6 +2,7 @@
 
 #include "jade/Component.hpp"
 #include "jade/ComponentClass.hpp"
+#include "jade/Transform.hpp"
 #include <concepts>
 #include <memory>
 #include <string>
@@ -14,9 +15,12 @@ class GameObject
     std::vector<std::unique_ptr<Component>> m_components;
 
   public:
+    Transform transform;
     explicit GameObject(std::string_view name);
+    GameObject(std::string_view name, Transform transform);
 
     template <typename T> void addComponent(ComponentClass componentClass) requires std::derived_from<T, Component>;
+    void emplaceComponent(std::unique_ptr<Component> component);
     template <typename T> T* getComponent(ComponentClass componentClass) requires std::derived_from<T, Component>;
     template <typename T> void removeComponent(ComponentClass componentClass) requires std::derived_from<T, Component>;
 
@@ -32,7 +36,8 @@ void GameObject::addComponent(ComponentClass componentClass) requires std::deriv
     m_components.emplace_back(Component::make(componentClass, this));
 }
 
-template <typename T> T* GameObject::getComponent(ComponentClass componentClass) requires std::derived_from<T, Component>
+template <typename T>
+T* GameObject::getComponent(ComponentClass componentClass) requires std::derived_from<T, Component>
 {
     for (auto& component : m_components)
     {

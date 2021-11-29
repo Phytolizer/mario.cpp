@@ -14,6 +14,7 @@ void Scene::start()
     for (auto& go : m_gameObjects)
     {
         go->start();
+        m_renderer.add(go.get());
     }
 }
 
@@ -27,5 +28,11 @@ void Scene::addGameObject(std::unique_ptr<GameObject> gameObject)
     {
         m_gameObjects.emplace_back(std::move(gameObject));
         m_gameObjects.back()->start();
+        m_renderer.add(m_gameObjects.back().get());
     }
+}
+
+Camera& Scene::getCamera()
+{
+    return m_camera;
 }
