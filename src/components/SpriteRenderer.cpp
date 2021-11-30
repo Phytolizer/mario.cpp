@@ -2,7 +2,7 @@
 #include <fmt/core.h>
 #include <jade/GameObject.hpp>
 
-SpriteRenderer::SpriteRenderer(GameObject* go) : Component(go)
+SpriteRenderer::SpriteRenderer(GameObject* go) : Component(go), m_color{1, 1, 1, 1}
 {
 }
 
