@@ -31,6 +31,8 @@ Texture::Texture(std::string_view filePath) : m_filePath(filePath)
         std::string message = fmt::format("Error: Failed to load image '{}'", m_filePath);
         throw std::runtime_error{message};
     }
+    m_width = width;
+    m_height = height;
 
     // Set texture data
     GLenum format;
@@ -58,4 +60,14 @@ void Texture::bind()
 void Texture::unbind()
 {
     glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+int Texture::getWidth() const
+{
+    return m_width;
+}
+
+int Texture::getHeight() const
+{
+    return m_height;
 }

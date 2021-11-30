@@ -1,6 +1,5 @@
 #include "components/SpriteRenderer.hpp"
 #include <fmt/core.h>
-#include <iostream>
 #include <jade/GameObject.hpp>
 
 SpriteRenderer::SpriteRenderer(GameObject* go, glm::vec4 color) : Component(go), m_color(color), m_sprite(nullptr)
@@ -25,7 +24,7 @@ const glm::vec4& SpriteRenderer::getColor() const
     return m_color;
 }
 
-SpriteRenderer::SpriteRenderer(GameObject* go, std::unique_ptr<Sprite> sprite)
+SpriteRenderer::SpriteRenderer(GameObject* go, std::shared_ptr<Sprite> sprite)
     : Component(go), m_color(1, 1, 1, 1), m_sprite(std::move(sprite))
 {
 }

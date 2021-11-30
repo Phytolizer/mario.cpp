@@ -112,6 +112,7 @@ add_library(
     "src/components/FontRenderer.cpp"
     "src/components/Sprite.cpp"
     "src/components/SpriteRenderer.cpp"
+    "src/components/SpriteSheet.cpp"
 )
 target_include_directories(
     "components"

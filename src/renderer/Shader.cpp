@@ -1,5 +1,5 @@
 #include "renderer/Shader.hpp"
-#include "fmt/core.h"
+#include <fmt/format.h>
 #include <fstream>
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>

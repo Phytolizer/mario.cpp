@@ -7,12 +7,15 @@
 
 class Sprite
 {
-    std::unique_ptr<Texture> m_texture;
+    // ownership of the texture is complex.
+    // either the Sprite owns it or the SpriteSheet does,
+    // so it's shared ownership.
+    std::shared_ptr<Texture> m_texture;
     std::vector<glm::vec2> m_texCoords;
 
   public:
-    explicit Sprite(std::unique_ptr<Texture> texture);
-    Sprite(std::unique_ptr<Texture> texture, std::vector<glm::vec2> texCoords);
+    explicit Sprite(std::shared_ptr<Texture> texture);
+    Sprite(std::shared_ptr<Texture> texture, std::vector<glm::vec2> texCoords);
 
     [[nodiscard]] Texture* getTexture();
     [[nodiscard]] const std::vector<glm::vec2>& getTexCoords() const;
