@@ -24,6 +24,7 @@ Texture::Texture(std::string_view filePath) : m_filePath(filePath)
     int width;
     int height;
     int nrChannels;
+    stbi_set_flip_vertically_on_load(true);
     unsigned char* image = stbi_load(m_filePath.c_str(), &width, &height, &nrChannels, 0);
     if (image == nullptr)
     {

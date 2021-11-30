@@ -136,13 +136,20 @@ void Shader::detach()
 
 void Shader::uploadMat4(std::string_view uniformName, glm::mat4 matrix)
 {
-    int uniformLocation = glGetUniformLocation(m_shaderProgramId, uniformName.data());
+    int uniformLocation = glGetUniformLocation(m_shaderProgramId, std::string{uniformName}.c_str());
     glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 void Shader::uploadTexture(std::string_view textureName, unsigned int slot)
 {
-    int uniformLocation = glGetUniformLocation(m_shaderProgramId, textureName.data());
+    int uniformLocation = glGetUniformLocation(m_shaderProgramId, std::string{textureName}.c_str());
     use();
     glUniform1i(uniformLocation, slot);
+}
+
+void Shader::uploadIntArray(std::string_view arrayName, const std::vector<int>& array)
+{
+    int varLocation = glGetUniformLocation(m_shaderProgramId, std::string{arrayName}.c_str());
+    use();
+    glUniform1iv(varLocation, array.size(), array.data());
 }

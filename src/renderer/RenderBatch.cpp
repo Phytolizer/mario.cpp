@@ -39,6 +39,20 @@ void RenderBatch::loadVertexProperties(size_t index)
     size_t offset = 4 * index * VERTEX_SIZE;
 
     glm::vec4 color = sprite->getColor();
+    std::vector<glm::vec2> texCoords = sprite->getTexCoords();
+    size_t texId = 0;
+    if (sprite->getTexture() != nullptr)
+    {
+        for (size_t i = 0; i < m_textures.size(); ++i)
+        {
+            if (m_textures[i] == sprite->getTexture())
+            {
+                // 0 is reserved
+                texId = i + 1;
+                break;
+            }
+        }
+    }
     // Add vertices with the appropriate properties
     float xAdd = 1.0F;
     float yAdd = 1.0F;
@@ -69,6 +83,13 @@ void RenderBatch::loadVertexProperties(size_t index)
         m_vertices[offset + 3] = color.g;
         m_vertices[offset + 4] = color.b;
         m_vertices[offset + 5] = color.a;
+
+        // Load texture coordinates
+        m_vertices[offset + 6] = texCoords[i].x;
+        m_vertices[offset + 7] = texCoords[i].y;
+
+        // Load texture id
+        m_vertices[offset + 8] = texId;
 
         offset += VERTEX_SIZE;
     }
@@ -101,10 +122,14 @@ void RenderBatch::start()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboId);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(int), indices.data(), GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, POS_SIZE, GL_FLOAT, GL_FALSE, VERTEX_SIZE * sizeof(float), (void*)POS_OFFSET);
+    glVertexAttribPointer(0, POS_SIZE, GL_FLOAT, GL_FALSE, VERTEX_SIZE_BYTES, (void*)POS_OFFSET);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, COLOR_SIZE, GL_FLOAT, GL_FALSE, VERTEX_SIZE * sizeof(float), (void*)COLOR_OFFSET);
+    glVertexAttribPointer(1, COLOR_SIZE, GL_FLOAT, GL_FALSE, VERTEX_SIZE_BYTES, (void*)COLOR_OFFSET);
     glEnableVertexAttribArray(1);
+    glVertexAttribPointer(2, TEX_COORDS_SIZE, GL_FLOAT, GL_FALSE, VERTEX_SIZE_BYTES, (void*)TEX_COORDS_OFFSET);
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(3, TEX_ID_SIZE, GL_FLOAT, GL_FALSE, VERTEX_SIZE_BYTES, (void*)TEX_ID_OFFSET);
+    glEnableVertexAttribArray(3);
 }
 
 void RenderBatch::addSprite(SpriteRenderer* sprite)
@@ -113,6 +138,12 @@ void RenderBatch::addSprite(SpriteRenderer* sprite)
     size_t index = m_numSprites;
     m_sprites[index] = sprite;
     ++m_numSprites;
+
+    if (sprite->getTexture() != nullptr &&
+        std::find(m_textures.begin(), m_textures.end(), sprite->getTexture()) == m_textures.end())
+    {
+        m_textures.push_back(sprite->getTexture());
+    }
 
     // Add properties to local vertices array
     loadVertexProperties(index);
@@ -132,6 +163,12 @@ void RenderBatch::render()
     m_shader.use();
     m_shader.uploadMat4("uProjection", Window::getScene().getCamera().getProjectionMatrix());
     m_shader.uploadMat4("uView", Window::getScene().getCamera().getViewMatrix());
+    for (size_t i = 0; i < m_textures.size(); ++i)
+    {
+        glActiveTexture(GL_TEXTURE0 + i + 1);
+        m_textures[i]->bind();
+    }
+    m_shader.uploadIntArray("uTextures", m_texSlots);
 
     glBindVertexArray(m_vaoId);
     glEnableVertexAttribArray(0);
@@ -143,6 +180,10 @@ void RenderBatch::render()
     glDisableVertexAttribArray(1);
     glBindVertexArray(0);
 
+    for (const auto& texture : m_textures)
+    {
+        texture->unbind();
+    }
     m_shader.detach();
 }
 

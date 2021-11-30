@@ -16,34 +16,23 @@ LevelEditorScene::LevelEditorScene()
 
 void LevelEditorScene::init()
 {
-    size_t xOffset = 10;
-    size_t yOffset = 10;
+    m_camera = Camera{glm::vec2{-250, 0}};
 
-    float totalWidth = (float)(600 - xOffset * 2);
-    float totalHeight = (float)(300 - yOffset * 2);
-    float sizeX = totalWidth / 100.0F;
-    float sizeY = totalHeight / 100.0F;
+    auto obj1 = std::make_unique<GameObject>("Object 1", Transform{glm::vec2{100, 100}, glm::vec2{256, 256}});
+    obj1->emplaceComponent(
+        std::make_unique<SpriteRenderer>(obj1.get(), std::make_unique<Texture>("res/images/testImage.png")));
+    addGameObject(std::move(obj1));
 
-    for (size_t x = 0; x < 100; ++x)
-    {
-        for (size_t y = 0; y < 100; ++y)
-        {
-            float xPos = (float)x * sizeX + xOffset;
-            float yPos = (float)y * sizeY + yOffset;
-
-            auto go = std::make_unique<GameObject>(fmt::format("Obj{}{}", x, y),
-                                                   Transform{glm::vec2{xPos, yPos}, glm::vec2{sizeX, sizeY}});
-            go->emplaceComponent(std::make_unique<SpriteRenderer>(
-                go.get(), glm::vec4{xPos / totalWidth, yPos / totalHeight, 1.0F, 1.0F}));
-            addGameObject(std::move(go));
-        }
-    }
+    auto obj2 = std::make_unique<GameObject>("Object 2", Transform{glm::vec2{400, 100}, glm::vec2{256, 256}});
+    obj2->emplaceComponent(
+        std::make_unique<SpriteRenderer>(obj2.get(), std::make_unique<Texture>("res/images/testImage2.png")));
+    addGameObject(std::move(obj2));
 }
 
 void LevelEditorScene::update(float dt)
 {
     std::cout << (1.0F / dt) << " FPS" << std::endl;
-    for (auto& gameObject : m_gameObjects)
+    for (const auto& gameObject : m_gameObjects)
     {
         gameObject->update(dt);
     }

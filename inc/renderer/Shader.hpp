@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 #include <string_view>
+#include <vector>
 
 struct Shader
 {
@@ -20,4 +21,5 @@ struct Shader
 
     void uploadMat4(std::string_view uniformName, glm::mat4 matrix);
     void uploadTexture(std::string_view textureName, unsigned int slot);
+    void uploadIntArray(std::string_view arrayName, const std::vector<int>& array);
 };
