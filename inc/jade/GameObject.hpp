@@ -13,11 +13,12 @@ class GameObject
 {
     std::string m_name;
     std::vector<std::unique_ptr<Component>> m_components;
+    int m_zIndex;
 
   public:
     Transform transform;
-    explicit GameObject(std::string_view name);
-    GameObject(std::string_view name, Transform transform);
+    explicit GameObject(std::string_view name, int zIndex);
+    GameObject(std::string_view name, Transform transform, int zIndex);
 
     template <typename T> void addComponent(ComponentClass componentClass) requires std::derived_from<T, Component>;
     void emplaceComponent(std::unique_ptr<Component> component);
@@ -28,6 +29,7 @@ class GameObject
 
     void update(float dt);
     void start();
+    [[nodiscard]] int zIndex() const;
 };
 
 template <typename T>

@@ -1,11 +1,12 @@
 #include "jade/GameObject.hpp"
 #include "jade/Transform.hpp"
 
-GameObject::GameObject(std::string_view name) : m_name(name)
+GameObject::GameObject(std::string_view name, int zIndex) : m_name(name), m_zIndex(zIndex)
 {
 }
 
-GameObject::GameObject(std::string_view name, Transform transform) : m_name(name), transform(transform)
+GameObject::GameObject(std::string_view name, Transform transform, int zIndex)
+    : m_name(name), m_zIndex(zIndex), transform(transform)
 {
 }
 
@@ -33,4 +34,9 @@ void GameObject::start()
     {
         m_components[i]->start();
     }
+}
+
+int GameObject::zIndex() const
+{
+    return m_zIndex;
 }

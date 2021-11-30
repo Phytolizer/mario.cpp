@@ -79,6 +79,9 @@ void Window::init()
 
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+
     changeScene(0);
 }
 

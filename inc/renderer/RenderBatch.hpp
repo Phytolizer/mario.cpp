@@ -29,13 +29,14 @@ class RenderBatch
     unsigned int m_vboId;
     size_t m_maxBatchSize;
     Shader m_shader;
+    int m_zIndex;
 
     std::vector<unsigned int> generateIndices();
     void loadElementIndices(std::vector<unsigned int>* elements, size_t index);
     void loadVertexProperties(size_t index);
 
   public:
-    explicit RenderBatch(size_t maxBatchSize);
+    explicit RenderBatch(size_t maxBatchSize, int zIndex);
 
     void start();
     void addSprite(SpriteRenderer* sprite);
@@ -43,4 +44,5 @@ class RenderBatch
     [[nodiscard]] bool hasRoom() const;
     [[nodiscard]] bool hasTextureRoom() const;
     [[nodiscard]] bool hasTexture(Texture* tex) const;
+    [[nodiscard]] int zIndex() const;
 };

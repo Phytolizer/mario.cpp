@@ -95,8 +95,9 @@ void RenderBatch::loadVertexProperties(size_t index)
     }
 }
 
-RenderBatch::RenderBatch(size_t maxBatchSize)
-    : m_numSprites(0), m_hasRoom(true), m_maxBatchSize(maxBatchSize), m_shader("res/shaders/default.glsl")
+RenderBatch::RenderBatch(size_t maxBatchSize, int zIndex)
+    : m_numSprites(0), m_hasRoom(true), m_maxBatchSize(maxBatchSize), m_shader("res/shaders/default.glsl"),
+      m_zIndex(zIndex)
 {
     m_sprites.resize(maxBatchSize);
     m_vertices.resize(maxBatchSize * 4 * VERTEX_SIZE, 0.0F);
@@ -213,4 +214,9 @@ bool RenderBatch::hasTextureRoom() const
 bool RenderBatch::hasTexture(Texture* tex) const
 {
     return std::find(m_textures.begin(), m_textures.end(), tex) != m_textures.end();
+}
+
+int RenderBatch::zIndex() const
+{
+    return m_zIndex;
 }
