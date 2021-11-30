@@ -48,6 +48,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable("glm")
 
 add_subdirectory("3rd/glad")
+add_subdirectory("3rd/imgui")
 add_subdirectory("3rd/stb")
 
 list(APPEND CMAKE_CXX_FLAGS "-Wall")
@@ -82,7 +83,7 @@ target_include_directories(
 )
 target_link_libraries(
     "renderer"
-    PUBLIC "glad" "glfw" "glm" "stb" "util"
+    PUBLIC "glad" "glfw" "glm" "imgui" "stb" "util"
 )
 
 add_library(
@@ -90,6 +91,7 @@ add_library(
     "src/jade/Camera.cpp"
     "src/jade/Component.cpp"
     "src/jade/GameObject.cpp"
+    "src/jade/ImGuiLayer.cpp"
     "src/jade/KeyListener.cpp"
     "src/jade/LevelEditorScene.cpp"
     "src/jade/LevelScene.cpp"

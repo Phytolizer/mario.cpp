@@ -6,6 +6,7 @@
 #include "util/Time.hpp"
 #include <GLFW/glfw3.h>
 #include <fmt/format.h>
+#include <imgui.h>
 #include <iostream>
 #include <memory>
 #include <stdexcept>
@@ -18,7 +19,7 @@ static void error_callback(int error, const char* description)
 Window Window::s_window;
 std::unique_ptr<Scene> Window::s_currentScene;
 
-Window::Window() : m_width(1920), m_height(1080), m_title("Mario"), r(1.0F), g(1.0F), b(1.0F)
+Window::Window() : m_width(1920), m_height(1080), m_title("Mario"), m_imguiLayer(nullptr), r(1.0F), g(1.0F), b(1.0F)
 {
 }
 
@@ -38,6 +39,16 @@ void Window::run()
     loop();
     glfwDestroyWindow(m_glfwWindow);
     glfwTerminate();
+}
+
+int Window::getWidth() const
+{
+    return m_width;
+}
+
+int Window::getHeight() const
+{
+    return m_height;
 }
 
 void Window::init()
@@ -68,6 +79,10 @@ void Window::init()
     glfwSetMouseButtonCallback(m_glfwWindow, MouseListener::mouseButtonCallback);
     glfwSetScrollCallback(m_glfwWindow, MouseListener::mouseScrollCallback);
     glfwSetKeyCallback(m_glfwWindow, KeyListener::keyCallback);
+    glfwSetWindowSizeCallback(m_glfwWindow, [](GLFWwindow* window, int width, int height) {
+        Window::get().m_width = width;
+        Window::get().m_height = height;
+    });
 
     // Make the OpenGL context current
     glfwMakeContextCurrent(m_glfwWindow);
@@ -81,6 +96,8 @@ void Window::init()
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+
+    m_imguiLayer.setWindow(m_glfwWindow);
 
     changeScene(0);
 }
@@ -106,6 +123,8 @@ void Window::loop()
         {
             s_currentScene->update(dt);
         }
+
+        m_imguiLayer.update(dt);
 
         glfwSwapBuffers(m_glfwWindow);
 
