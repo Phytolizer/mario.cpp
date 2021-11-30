@@ -109,7 +109,11 @@ target_link_libraries(
 
 add_library(
     "components"
+    "src/components/DependentSpriteRenderer.cpp"
+    "src/components/DependentSprite.cpp"
     "src/components/FontRenderer.cpp"
+    "src/components/IndependentSprite.cpp"
+    "src/components/IndependentSpriteRenderer.cpp"
     "src/components/Sprite.cpp"
     "src/components/SpriteRenderer.cpp"
     "src/components/SpriteSheet.cpp"

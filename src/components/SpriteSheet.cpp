@@ -1,6 +1,8 @@
 #include "components/SpriteSheet.hpp"
 
-SpriteSheet::SpriteSheet(std::shared_ptr<Texture> texture, int spriteWidth, int spriteHeight, int numSprites,
+#include "components/DependentSprite.hpp"
+
+SpriteSheet::SpriteSheet(std::unique_ptr<Texture> texture, int spriteWidth, int spriteHeight, int numSprites,
                          int spacing)
     : m_texture(std::move(texture))
 {
@@ -19,7 +21,7 @@ SpriteSheet::SpriteSheet(std::shared_ptr<Texture> texture, int spriteWidth, int 
             glm::vec2{leftX, bottomY},
             glm::vec2{leftX, topY},
         };
-        m_sprites.emplace_back(std::make_shared<Sprite>(m_texture, texCoords));
+        m_sprites.emplace_back(std::make_unique<DependentSprite>(m_texture.get(), texCoords));
 
         currentX += spriteWidth + spacing;
         if (currentX >= m_texture->getWidth())
@@ -30,7 +32,7 @@ SpriteSheet::SpriteSheet(std::shared_ptr<Texture> texture, int spriteWidth, int 
     }
 }
 
-std::shared_ptr<Sprite> SpriteSheet::getSprite(size_t index)
+Sprite* SpriteSheet::getSprite(size_t index)
 {
-    return m_sprites[index];
+    return m_sprites[index].get();
 }

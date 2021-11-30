@@ -7,10 +7,10 @@
 
 class SpriteSheet
 {
-    std::shared_ptr<Texture> m_texture;
-    std::vector<std::shared_ptr<Sprite>> m_sprites;
+    std::unique_ptr<Texture> m_texture;
+    std::vector<std::unique_ptr<Sprite>> m_sprites;
 
   public:
-    SpriteSheet(std::shared_ptr<Texture> texture, int spriteWidth, int spriteHeight, int numSprites, int spacing);
-    std::shared_ptr<Sprite> getSprite(size_t index);
+    SpriteSheet(std::unique_ptr<Texture> texture, int spriteWidth, int spriteHeight, int numSprites, int spacing);
+    Sprite* getSprite(size_t index);
 };

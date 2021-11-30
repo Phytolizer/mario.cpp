@@ -10,15 +10,16 @@
 class SpriteRenderer : public Component
 {
     glm::vec4 m_color;
-    std::shared_ptr<Sprite> m_sprite;
+
+  protected:
+    explicit SpriteRenderer(GameObject* go);
+    SpriteRenderer(GameObject* go, glm::vec4 color);
 
   public:
-    SpriteRenderer(GameObject* go, glm::vec4 color);
-    SpriteRenderer(GameObject* go, std::shared_ptr<Sprite> sprite);
     bool hasClass(ComponentClass cls) override;
     void start() override;
     void update(float dt) override;
     [[nodiscard]] const glm::vec4& getColor() const;
-    [[nodiscard]] Texture* getTexture();
-    [[nodiscard]] const std::vector<glm::vec2>& getTexCoords() const;
+    [[nodiscard]] virtual Texture* getTexture() = 0;
+    [[nodiscard]] const virtual std::vector<glm::vec2>& getTexCoords() const = 0;
 };
