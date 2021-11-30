@@ -20,6 +20,7 @@ void LevelEditorScene::init()
 
     auto obj1 = std::make_unique<GameObject>("Object 1", Transform{glm::vec2{100, 100}, glm::vec2{256, 256}});
     obj1->emplaceComponent(std::make_unique<DependentSpriteRenderer>(obj1.get(), m_spriteSheet->getSprite(0)));
+    m_obj1 = obj1.get();
     addGameObject(std::move(obj1));
 
     auto obj2 = std::make_unique<GameObject>("Object 2", Transform{glm::vec2{400, 100}, glm::vec2{256, 256}});
@@ -29,6 +30,7 @@ void LevelEditorScene::init()
 
 void LevelEditorScene::update(float dt)
 {
+    m_obj1->transform.position.x += dt * 10;
     std::cout << (1.0F / dt) << " FPS" << std::endl;
     for (const auto& gameObject : m_gameObjects)
     {

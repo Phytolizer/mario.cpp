@@ -13,3 +13,9 @@ const std::vector<glm::vec2>& DependentSpriteRenderer::getTexCoords() const
 {
     return m_sprite->getTexCoords();
 }
+
+void DependentSpriteRenderer::setSprite(Sprite* sprite)
+{
+    m_sprite = sprite;
+    m_isDirty = true;
+}

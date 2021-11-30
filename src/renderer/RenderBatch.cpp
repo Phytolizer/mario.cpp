@@ -155,9 +155,22 @@ void RenderBatch::addSprite(SpriteRenderer* sprite)
 
 void RenderBatch::render()
 {
-    // For now, rebuffer all data each frame
-    glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, m_vertices.size() * sizeof(float), m_vertices.data());
+    bool rebufferData = false;
+    for (size_t i = 0; i < m_numSprites; ++i)
+    {
+        auto& spr = m_sprites[i];
+        if (spr->isDirty())
+        {
+            loadVertexProperties(i);
+            spr->setClean();
+            rebufferData = true;
+        }
+    }
+    if (rebufferData)
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, m_vboId);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, m_vertices.size() * sizeof(float), m_vertices.data());
+    }
 
     // Use shader
     m_shader.use();

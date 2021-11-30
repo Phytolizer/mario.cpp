@@ -1,8 +1,6 @@
 #include "jade/Transform.hpp"
 
-Transform::Transform() : position(), scale()
-{
-}
+Transform::Transform() = default;
 
 Transform::Transform(glm::vec2 position) : position(position), scale()
 {
