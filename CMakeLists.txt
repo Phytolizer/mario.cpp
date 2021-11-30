@@ -110,6 +110,7 @@ target_link_libraries(
 add_library(
     "components"
     "src/components/FontRenderer.cpp"
+    "src/components/Sprite.cpp"
     "src/components/SpriteRenderer.cpp"
 )
 target_include_directories(

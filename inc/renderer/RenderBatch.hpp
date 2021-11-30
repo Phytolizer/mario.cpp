@@ -41,4 +41,6 @@ class RenderBatch
     void addSprite(SpriteRenderer* sprite);
     void render();
     [[nodiscard]] bool hasRoom() const;
+    [[nodiscard]] bool hasTextureRoom() const;
+    [[nodiscard]] bool hasTexture(Texture* tex) const;
 };

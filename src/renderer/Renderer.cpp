@@ -4,8 +4,7 @@
 
 void Renderer::add(GameObject* go)
 {
-    SpriteRenderer* spr = go->getComponent<SpriteRenderer>(ComponentClass::SPRITE_RENDERER);
-    if (spr != nullptr)
+    if (auto* spr = go->getComponent<SpriteRenderer>(ComponentClass::SPRITE_RENDERER); spr != nullptr)
     {
         add(spr);
     }
@@ -18,9 +17,12 @@ void Renderer::add(SpriteRenderer* spr)
     {
         if (batch.hasRoom())
         {
-            batch.addSprite(spr);
-            added = true;
-            break;
+            if (Texture* tex = spr->getTexture(); tex == nullptr || batch.hasTexture(tex) || batch.hasTextureRoom())
+            {
+                batch.addSprite(spr);
+                added = true;
+                break;
+            }
         }
     }
     if (!added)

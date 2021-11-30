@@ -1,5 +1,6 @@
 #pragma once
 
+#include "components/Sprite.hpp"
 #include <glm/vec2.hpp>
 #include <glm/vec4.hpp>
 #include <jade/Component.hpp>
@@ -10,16 +11,15 @@
 class SpriteRenderer : public Component
 {
     glm::vec4 m_color;
-    std::vector<glm::vec2> m_texCoords;
-    std::unique_ptr<Texture> m_texture;
+    std::unique_ptr<Sprite> m_sprite;
 
   public:
     SpriteRenderer(GameObject* go, glm::vec4 color);
-    SpriteRenderer(GameObject* go, std::unique_ptr<Texture> texture);
+    SpriteRenderer(GameObject* go, std::unique_ptr<Sprite> sprite);
     bool hasClass(ComponentClass cls) override;
     void start() override;
     void update(float dt) override;
-    const glm::vec4& getColor() const;
-    Texture* getTexture();
-    std::vector<glm::vec2> getTexCoords();
+    [[nodiscard]] const glm::vec4& getColor() const;
+    [[nodiscard]] Texture* getTexture();
+    [[nodiscard]] const std::vector<glm::vec2>& getTexCoords() const;
 };

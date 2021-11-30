@@ -191,3 +191,13 @@ bool RenderBatch::hasRoom() const
 {
     return m_hasRoom;
 }
+
+bool RenderBatch::hasTextureRoom() const
+{
+    return m_textures.size() < 8;
+}
+
+bool RenderBatch::hasTexture(Texture* tex) const
+{
+    return std::find(m_textures.begin(), m_textures.end(), tex) != m_textures.end();
+}
