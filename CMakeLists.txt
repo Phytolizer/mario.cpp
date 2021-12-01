@@ -123,7 +123,7 @@ add_custom_command(
     TARGET "mario"
     POST_BUILD
     COMMAND "${CMAKE_COMMAND}" -E copy_directory "${PROJECT_SOURCE_DIR}/res"
-            "$<TARGET_DIR:mario>/res"
+            "$<TARGET_FILE_DIR:mario>/res"
 )
 set_target_properties(
     "mario" PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
