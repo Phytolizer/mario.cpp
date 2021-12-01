@@ -26,7 +26,7 @@ void ImGuiLayer::setWindow(GLFWwindow* window)
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
         ImGui_ImplGlfw_InitForOpenGL(m_window, true);
         ImGui_ImplOpenGL3_Init("#version 330 core");
-        io.Fonts->AddFontFromFileTTF(R"(C:\Windows\Fonts\CONSOLA.TTF)", 20.0F);
+        io.Fonts->AddFontFromFileTTF("res/fonts/Tuffy.ttf", 20.0F);
     }
 }
 

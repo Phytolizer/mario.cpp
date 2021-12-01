@@ -70,24 +70,20 @@ target_link_libraries(
 )
 
 add_library(
-    "renderer"
-    "src/renderer/RenderBatch.cpp"
-    "src/renderer/Renderer.cpp"
-    "src/renderer/Shader.cpp"
-    "src/renderer/stb_image.cpp"
-    "src/renderer/Texture.cpp"
-)
-target_include_directories(
-    "renderer"
-    PUBLIC "${PROJECT_SOURCE_DIR}/inc"
-)
-target_link_libraries(
-    "renderer"
-    PUBLIC "glad" "glfw" "glm" "imgui" "stb" "util"
-)
-
-add_library(
     "jade"
+    "src/jade/components/DependentSpriteRenderer.cpp"
+    "src/jade/components/DependentSprite.cpp"
+    "src/jade/components/FontRenderer.cpp"
+    "src/jade/components/IndependentSprite.cpp"
+    "src/jade/components/IndependentSpriteRenderer.cpp"
+    "src/jade/components/Sprite.cpp"
+    "src/jade/components/SpriteRenderer.cpp"
+    "src/jade/components/SpriteSheet.cpp"
+    "src/jade/renderer/RenderBatch.cpp"
+    "src/jade/renderer/Renderer.cpp"
+    "src/jade/renderer/Shader.cpp"
+    "src/jade/renderer/stb_image.cpp"
+    "src/jade/renderer/Texture.cpp"
     "src/jade/Camera.cpp"
     "src/jade/Component.cpp"
     "src/jade/GameObject.cpp"
@@ -106,27 +102,7 @@ target_include_directories(
 )
 target_link_libraries(
     "jade"
-    PUBLIC "fmt" "renderer" "util"
-)
-
-add_library(
-    "components"
-    "src/components/DependentSpriteRenderer.cpp"
-    "src/components/DependentSprite.cpp"
-    "src/components/FontRenderer.cpp"
-    "src/components/IndependentSprite.cpp"
-    "src/components/IndependentSpriteRenderer.cpp"
-    "src/components/Sprite.cpp"
-    "src/components/SpriteRenderer.cpp"
-    "src/components/SpriteSheet.cpp"
-)
-target_include_directories(
-    "components"
-    PUBLIC "${PROJECT_SOURCE_DIR}/inc"
-)
-target_link_libraries(
-    "components"
-    PUBLIC "jade"
+    PUBLIC "fmt" "util" "glad" "glfw" "glm" "imgui" "stb" "util"
 )
 
 add_library(
@@ -144,7 +120,7 @@ add_executable(
 )
 target_link_libraries(
     "mario"
-    PRIVATE "components" "jade" "nativefiledialog"
+    PRIVATE "jade" "nativefiledialog"
 )
 add_custom_command(
     TARGET "mario" POST_BUILD
