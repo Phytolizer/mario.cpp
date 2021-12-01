@@ -52,6 +52,7 @@ FetchContent_Declare(
     GIT_TAG "v3.10.4"
 )
 FetchContent_MakeAvailable("json")
+find_package(protobuf CONFIG REQUIRED)
 
 add_subdirectory("3rd/glad")
 add_subdirectory("3rd/imgui")
@@ -113,6 +114,7 @@ target_link_libraries(
            "stb"
            "util"
 )
+target_link_libraries("jade" PUBLIC "protobuf::libprotoc" "protobuf::libprotobuf")
 
 add_library("physics" "src/physics/whatever.cpp")
 target_include_directories("physics" PUBLIC "${PROJECT_SOURCE_DIR}/inc")
