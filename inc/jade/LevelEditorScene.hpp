@@ -7,7 +7,6 @@
 class LevelEditorScene : public Scene
 {
     std::unique_ptr<SpriteSheet> m_spriteSheet;
-    GameObject* m_obj1;
 
   public:
     LevelEditorScene();
