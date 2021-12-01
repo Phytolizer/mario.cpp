@@ -26,8 +26,8 @@ void LevelEditorScene::init()
     addGameObject(std::move(obj2));
 
     auto obj1 = std::make_unique<GameObject>("Object 1", Transform{glm::vec2{200, 100}, glm::vec2{256, 256}}, 0);
-    obj1->emplaceComponent(std::make_unique<IndependentSpriteRenderer>(
-        obj1.get(), std::make_unique<IndependentSprite>(std::make_unique<Texture>("res/images/blendImage1.png"))));
+    obj1->emplaceComponent(std::make_unique<IndependentSpriteRenderer>(obj1.get(), glm::vec4{1, 1, 1, 1}));
+    activeGameObject = obj1.get();
     addGameObject(std::move(obj1));
 }
 
@@ -40,4 +40,10 @@ void LevelEditorScene::update(float dt)
     }
 
     m_renderer.render();
+}
+void LevelEditorScene::imgui()
+{
+    ImGui::Begin("Test Window");
+    ImGui::Text("Some random text");
+    ImGui::End();
 }

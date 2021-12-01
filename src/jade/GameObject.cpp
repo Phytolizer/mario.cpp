@@ -40,3 +40,11 @@ int GameObject::zIndex() const
 {
     return m_zIndex;
 }
+
+void GameObject::imgui()
+{
+    for (auto& c : m_components)
+    {
+        c->imgui();
+    }
+}

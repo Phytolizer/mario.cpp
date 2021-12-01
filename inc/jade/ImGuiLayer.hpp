@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Scene.hpp"
 #include <GLFW/glfw3.h>
 #include <imgui.h>
 #include <vector>
@@ -15,5 +16,5 @@ class ImGuiLayer
     ~ImGuiLayer();
 
     void setWindow(GLFWwindow* window);
-    void update(float deltaTime);
+    void update(float deltaTime, Scene* scene);
 };

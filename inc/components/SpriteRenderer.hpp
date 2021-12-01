@@ -8,7 +8,6 @@
 #include <renderer/Texture.hpp>
 #include <vector>
 
-
 class SpriteRenderer : public Component
 {
     glm::vec4 m_color;
@@ -30,4 +29,5 @@ class SpriteRenderer : public Component
     void setColor(glm::vec4 color);
     [[nodiscard]] bool isDirty() const;
     void setClean();
+    void imgui() override;
 };

@@ -124,7 +124,7 @@ void Window::loop()
             s_currentScene->update(dt);
         }
 
-        m_imguiLayer.update(dt);
+        m_imguiLayer.update(dt, s_currentScene.get());
 
         glfwSwapBuffers(m_glfwWindow);
 

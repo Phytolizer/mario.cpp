@@ -29,6 +29,7 @@ class GameObject
 
     void update(float dt);
     void start();
+    void imgui();
     [[nodiscard]] int zIndex() const;
 };
 

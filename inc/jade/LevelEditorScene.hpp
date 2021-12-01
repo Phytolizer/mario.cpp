@@ -14,4 +14,5 @@ class LevelEditorScene : public Scene
 
     void init() override;
     void update(float dt) override;
+    void imgui() override;
 };

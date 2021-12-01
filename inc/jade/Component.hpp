@@ -15,6 +15,7 @@ class Component
     virtual ~Component() = default;
     static std::unique_ptr<Component> make(ComponentClass componentClass, GameObject* go);
     virtual void start();
-    virtual void update(float dt) = 0;
+    virtual void update(float dt);
     virtual bool hasClass(ComponentClass cls) = 0;
+    virtual void imgui();
 };

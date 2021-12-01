@@ -1,4 +1,5 @@
 #include "jade/Scene.hpp"
+#include <imgui.h>
 
 Scene::Scene() : m_isRunning(false), m_camera(glm::vec2{})
 {
@@ -35,4 +36,20 @@ void Scene::addGameObject(std::unique_ptr<GameObject> gameObject)
 Camera& Scene::getCamera()
 {
     return m_camera;
+}
+
+void Scene::sceneImgui()
+{
+    if (activeGameObject != nullptr)
+    {
+        ImGui::Begin("Inspector");
+        activeGameObject->imgui();
+        ImGui::End();
+    }
+
+    imgui();
+}
+
+void Scene::imgui()
+{
 }

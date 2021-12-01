@@ -21,3 +21,11 @@ std::unique_ptr<Component> Component::make(ComponentClass componentClass, GameOb
 void Component::start()
 {
 }
+
+void Component::imgui()
+{
+}
+
+void Component::update(float dt)
+{
+}
