@@ -4,9 +4,10 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
-ImGuiLayer::ImGuiLayer(GLFWwindow* window) : m_window(window)
+ImGuiLayer::ImGuiLayer(GLFWwindow* window) : m_window(nullptr)
 {
     m_context = ImGui::CreateContext();
+    setWindow(window);
 }
 
 ImGuiLayer::~ImGuiLayer()
@@ -17,8 +18,14 @@ ImGuiLayer::~ImGuiLayer()
 void ImGuiLayer::setWindow(GLFWwindow* window)
 {
     m_window = window;
-    ImGui_ImplGlfw_InitForOpenGL(m_window, true);
-    ImGui_ImplOpenGL3_Init("#version 330 core");
+    if (m_window)
+    {
+        ImGuiIO& io = ImGui::GetIO();
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+        ImGui_ImplGlfw_InitForOpenGL(m_window, true);
+        ImGui_ImplOpenGL3_Init("#version 330 core");
+        io.Fonts->AddFontFromFileTTF(R"(C:\Windows\Fonts\CONSOLA.TTF)", 20.0F);
+    }
 }
 
 void ImGuiLayer::update(float deltaTime)
