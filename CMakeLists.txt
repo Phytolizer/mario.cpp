@@ -46,6 +46,12 @@ FetchContent_Declare(
     GIT_TAG "0.9.9.8"
 )
 FetchContent_MakeAvailable("glm")
+FetchContent_Declare(
+    "json"
+    GIT_REPOSITORY "https://github.com/nlohmann/json.git"
+    GIT_TAG "v3.10.4"
+)
+FetchContent_MakeAvailable("json")
 
 add_subdirectory("3rd/glad")
 add_subdirectory("3rd/imgui")
@@ -102,7 +108,7 @@ target_include_directories(
 )
 target_link_libraries(
     "jade"
-    PUBLIC "fmt" "util" "glad" "glfw" "glm" "imgui" "stb" "util"
+    PUBLIC "fmt" "util" "glad" "glfw" "glm" "imgui" "nlohmann_json" "stb" "util"
 )
 
 add_library(
