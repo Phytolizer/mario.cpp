@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.12...3.22)
 
 project(
-    "physics.cpp"
+    "mario.cpp"
     LANGUAGES "CXX"
     VERSION "0.1.0"
-    DESCRIPTION "A physics engine in C++"
-    HOMEPAGE_URL "https://github.com/Phytolizer/physics.cpp"
+    DESCRIPTION "A game engine in C++"
+    HOMEPAGE_URL "https://github.com/Phytolizer/mario.cpp"
 )
 
 set(CMAKE_CXX_STANDARD 20)
