@@ -56,12 +56,6 @@ add_subdirectory("3rd/glad")
 add_subdirectory("3rd/imgui")
 add_subdirectory("3rd/stb")
 
-list(
-    APPEND
-    CMAKE_CXX_FLAGS
-    "-Wall"
-)
-
 add_library(
     "util"
     "src/util/Regex.cpp"
