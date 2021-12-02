@@ -46,12 +46,6 @@ FetchContent_Declare(
     GIT_TAG "0.9.9.8"
 )
 FetchContent_MakeAvailable("glm")
-FetchContent_Declare(
-    "json"
-    GIT_REPOSITORY "https://github.com/nlohmann/json.git"
-    GIT_TAG "v3.10.4"
-)
-FetchContent_MakeAvailable("json")
 find_package(protobuf CONFIG REQUIRED)
 
 add_subdirectory("3rd/glad")
@@ -110,11 +104,10 @@ target_link_libraries(
            "glfw"
            "glm"
            "imgui"
-           "nlohmann_json"
+           "protobuf::libprotobuf"
            "stb"
            "util"
 )
-target_link_libraries("jade" PUBLIC "protobuf::libprotoc" "protobuf::libprotobuf")
 
 add_library("physics" "src/physics/whatever.cpp")
 target_include_directories("physics" PUBLIC "${PROJECT_SOURCE_DIR}/inc")
