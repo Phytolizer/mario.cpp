@@ -46,7 +46,11 @@ FetchContent_Declare(
     GIT_TAG "0.9.9.8"
 )
 FetchContent_MakeAvailable("glm")
-find_package(protobuf CONFIG REQUIRED)
+find_package(
+    protobuf
+    CONFIG
+    REQUIRED
+)
 
 add_subdirectory("3rd/glad")
 add_subdirectory("3rd/imgui")
