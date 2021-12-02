@@ -1,4 +1,4 @@
-#include "renderer/Shader.hpp"
+#include "jade/renderer/Shader.hpp"
 #include <fmt/format.h>
 #include <fstream>
 #include <glad/glad.h>

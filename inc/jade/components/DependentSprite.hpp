@@ -1,6 +1,6 @@
 #pragma once
 
-#include "components/Sprite.hpp"
+#include "Sprite.hpp"
 
 class DependentSprite : public Sprite
 {

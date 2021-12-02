@@ -1,4 +1,4 @@
-#include "components/IndependentSprite.hpp"
+#include "jade/components/IndependentSprite.hpp"
 
 IndependentSprite::IndependentSprite(std::unique_ptr<Texture> texture) : Sprite(), m_texture(std::move(texture))
 {

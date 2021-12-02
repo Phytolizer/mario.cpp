@@ -1,7 +1,7 @@
 #pragma once
 
-#include "components/SpriteRenderer.hpp"
-#include "renderer/RenderBatch.hpp"
+#include "RenderBatch.hpp"
+#include "jade/components/SpriteRenderer.hpp"
 #include <vector>
 class Renderer
 {

@@ -1,4 +1,4 @@
-#include "components/IndependentSpriteRenderer.hpp"
+#include "jade/components/IndependentSpriteRenderer.hpp"
 
 IndependentSpriteRenderer::IndependentSpriteRenderer(GameObject* go, glm::vec4 color)
     : SpriteRenderer(go, color), m_sprite(nullptr)

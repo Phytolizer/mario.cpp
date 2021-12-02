@@ -1,6 +1,6 @@
 #pragma once
 
-#include "components/SpriteRenderer.hpp"
+#include "SpriteRenderer.hpp"
 
 class DependentSpriteRenderer : public SpriteRenderer
 {

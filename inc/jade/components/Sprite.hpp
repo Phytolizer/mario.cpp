@@ -1,7 +1,7 @@
 #pragma once
 
+#include "jade/renderer/Texture.hpp"
 #include <glm/vec2.hpp>
-#include <renderer/Texture.hpp>
 #include <vector>
 
 class Sprite

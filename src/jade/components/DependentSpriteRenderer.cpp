@@ -1,4 +1,4 @@
-#include "components/DependentSpriteRenderer.hpp"
+#include "jade/components/DependentSpriteRenderer.hpp"
 
 DependentSpriteRenderer::DependentSpriteRenderer(GameObject* go, Sprite* sprite) : SpriteRenderer(go), m_sprite(sprite)
 {

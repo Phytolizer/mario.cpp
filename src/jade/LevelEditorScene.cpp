@@ -1,14 +1,9 @@
 #include "jade/LevelEditorScene.hpp"
 
-#include "jade/Camera.hpp"
 #include "jade/Window.hpp"
-#include <components/DependentSpriteRenderer.hpp>
-#include <components/IndependentSprite.hpp>
-#include <components/IndependentSpriteRenderer.hpp>
-#include <components/SpriteSheet.hpp>
-#include <fmt/format.h>
+#include "jade/components/IndependentSprite.hpp"
+#include "jade/components/IndependentSpriteRenderer.hpp"
 #include <iostream>
-#include <renderer/Shader.hpp>
 #include <vector>
 
 LevelEditorScene::LevelEditorScene() = default;

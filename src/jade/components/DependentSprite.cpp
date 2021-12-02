@@ -1,4 +1,4 @@
-#include "components/DependentSprite.hpp"
+#include "jade/components/DependentSprite.hpp"
 
 DependentSprite::DependentSprite(Texture* texture) : Sprite(), m_texture(texture)
 {

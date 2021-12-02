@@ -1,4 +1,4 @@
-#include "renderer/Texture.hpp"
+#include "jade/renderer/Texture.hpp"
 #include <fmt/format.h>
 #include <glad/glad.h>
 #include <iostream>

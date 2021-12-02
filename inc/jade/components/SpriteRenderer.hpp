@@ -1,11 +1,11 @@
 #pragma once
 
-#include "components/Sprite.hpp"
+#include "Sprite.hpp"
+#include "jade/Component.hpp"
+#include "jade/Transform.hpp"
+#include "jade/renderer/Texture.hpp"
 #include <glm/vec2.hpp>
 #include <glm/vec4.hpp>
-#include <jade/Component.hpp>
-#include <jade/Transform.hpp>
-#include <renderer/Texture.hpp>
 #include <vector>
 
 class SpriteRenderer : public Component

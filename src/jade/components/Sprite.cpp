@@ -1,6 +1,4 @@
-#include <utility>
-
-#include "components/Sprite.hpp"
+#include "jade/components/Sprite.hpp"
 
 Sprite::Sprite() : m_texCoords{glm::vec2{1, 1}, glm::vec2{1, 0}, glm::vec2{0, 0}, glm::vec2{0, 1}}
 {

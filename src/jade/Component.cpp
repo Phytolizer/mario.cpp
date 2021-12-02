@@ -1,7 +1,7 @@
 #include "jade/Component.hpp"
 #include "jade/ComponentClass.hpp"
-#include <components/FontRenderer.hpp>
-#include <components/IndependentSpriteRenderer.hpp>
+#include "jade/components/FontRenderer.hpp"
+#include "jade/components/IndependentSpriteRenderer.hpp"
 
 Component::Component(GameObject* go) : gameObject(go)
 {

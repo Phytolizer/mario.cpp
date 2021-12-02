@@ -1,6 +1,4 @@
-#include "components/SpriteSheet.hpp"
-
-#include "components/DependentSprite.hpp"
+#include "jade/components/SpriteSheet.hpp"
 
 SpriteSheet::SpriteSheet(std::unique_ptr<Texture> texture, int spriteWidth, int spriteHeight, int numSprites,
                          int spacing)

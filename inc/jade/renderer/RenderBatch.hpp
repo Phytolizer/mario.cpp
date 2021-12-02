@@ -1,8 +1,8 @@
 #pragma once
 
-#include "renderer/Shader.hpp"
-#include "renderer/Texture.hpp"
-#include <components/SpriteRenderer.hpp>
+#include "Shader.hpp"
+#include "Texture.hpp"
+#include <jade/components/SpriteRenderer.hpp>
 #include <vector>
 
 class RenderBatch

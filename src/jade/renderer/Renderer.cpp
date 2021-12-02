@@ -1,7 +1,6 @@
-#include "renderer/Renderer.hpp"
+#include "jade/renderer/Renderer.hpp"
+#include "jade/GameObject.hpp"
 #include <algorithm>
-#include <jade/ComponentClass.hpp>
-#include <jade/GameObject.hpp>
 
 void Renderer::add(GameObject* go)
 {

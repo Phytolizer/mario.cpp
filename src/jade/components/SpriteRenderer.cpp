@@ -1,6 +1,6 @@
-#include "components/SpriteRenderer.hpp"
+#include "jade/components/SpriteRenderer.hpp"
+#include "jade/GameObject.hpp"
 #include <imgui.h>
-#include <jade/GameObject.hpp>
 
 SpriteRenderer::SpriteRenderer(GameObject* go) : Component(go), m_color{1, 1, 1, 1}, m_isDirty(true)
 {

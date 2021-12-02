@@ -1,8 +1,7 @@
-#include "renderer/RenderBatch.hpp"
-
 #include <glad/glad.h>
 
-#include <jade/Window.hpp>
+#include "jade/Window.hpp"
+#include "jade/renderer/RenderBatch.hpp"
 
 std::vector<unsigned int> RenderBatch::generateIndices()
 {

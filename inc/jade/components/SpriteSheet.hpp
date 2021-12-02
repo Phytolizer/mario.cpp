@@ -1,9 +1,9 @@
 #pragma once
 
-#include "components/DependentSprite.hpp"
-#include "components/Sprite.hpp"
+#include "jade/components/DependentSprite.hpp"
+#include "jade/components/Sprite.hpp"
+#include "jade/renderer/Texture.hpp"
 #include <memory>
-#include <renderer/Texture.hpp>
 #include <vector>
 
 class SpriteSheet

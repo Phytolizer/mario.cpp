@@ -2,8 +2,8 @@
 
 #include "jade/Camera.hpp"
 #include "jade/GameObject.hpp"
+#include "jade/renderer/Renderer.hpp"
 #include <memory>
-#include <renderer/Renderer.hpp>
 #include <vector>
 
 struct Scene

@@ -2,7 +2,7 @@
 
 #include "jade/GameObject.hpp"
 #include "jade/Scene.hpp"
-#include <components/SpriteSheet.hpp>
+#include "jade/components/SpriteSheet.hpp"
 
 class LevelEditorScene : public Scene
 {
