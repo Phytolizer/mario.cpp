@@ -68,6 +68,7 @@ target_link_libraries("util" PUBLIC "pcre2-8" "fmt")
 
 add_custom_command(
     OUTPUT "${PROJECT_BINARY_DIR}/proto/Level.pb.cc"
+    DEPENDS "${PROJECT_SOURCE_DIR}/res/proto/Level.proto"
     COMMAND "${CMAKE_COMMAND}" -E make_directory "${PROJECT_BINARY_DIR}/proto"
     COMMAND
         "${Protobuf_PROTOC_EXECUTABLE}" --cpp_out="${PROJECT_BINARY_DIR}/proto"
