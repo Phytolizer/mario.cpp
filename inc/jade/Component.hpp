@@ -14,6 +14,7 @@ class Component
 
     explicit Component(GameObject* go);
     virtual ~Component() = default;
+    static std::unique_ptr<Component> fromSerial(const proto::Component& serial, GameObject* go);
     static std::unique_ptr<Component> make(ComponentClass componentClass, GameObject* go);
     virtual void start();
     virtual void update(float dt);

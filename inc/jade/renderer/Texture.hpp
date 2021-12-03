@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Level.pb.h"
+
 #include <string>
 #include <string_view>
 
@@ -18,4 +20,5 @@ class Texture
     [[nodiscard]] std::string_view getFilePath() const;
     [[nodiscard]] int getWidth() const;
     [[nodiscard]] int getHeight() const;
+    static std::unique_ptr<Texture> fromSerial(const proto::Texture& serial);
 };

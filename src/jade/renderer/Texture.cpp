@@ -76,3 +76,8 @@ int Texture::getHeight() const
 {
     return m_height;
 }
+
+std::unique_ptr<Texture> Texture::fromSerial(const proto::Texture& serial)
+{
+    return std::make_unique<Texture>(serial.filepath());
+}

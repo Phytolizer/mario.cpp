@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Level.pb.h"
 #include "jade/renderer/Texture.hpp"
 #include <glm/vec2.hpp>
 #include <vector>
@@ -20,4 +21,5 @@ class Sprite
 
     [[nodiscard]] virtual Texture* getTexture() = 0;
     [[nodiscard]] const std::vector<glm::vec2>& getTexCoords() const;
+    static std::unique_ptr<Sprite> fromSerial(const proto::Sprite& serial);
 };

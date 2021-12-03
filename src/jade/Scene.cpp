@@ -56,6 +56,21 @@ void Scene::imgui()
 {
 }
 
+void Scene::loadState()
+{
+    std::ifstream in{"level.pb", std::ios::in | std::ios::binary};
+    if (in)
+    {
+        proto::Level level;
+        level.ParseFromIstream(&in);
+        for (int i = 0; i < level.gameobjects_size(); ++i)
+        {
+            m_gameObjects.emplace_back(GameObject::fromSerial(level.gameobjects()[i]));
+        }
+        m_levelLoaded = true;
+    }
+}
+
 void Scene::saveState()
 {
     proto::Level level;

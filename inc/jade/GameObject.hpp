@@ -26,13 +26,14 @@ class GameObject
     template <typename T> T* getComponent(ComponentClass componentClass) requires std::derived_from<T, Component>;
     template <typename T> void removeComponent(ComponentClass componentClass) requires std::derived_from<T, Component>;
 
-    std::string_view getName() const;
+    [[nodiscard]] std::string_view getName() const;
 
     void update(float dt);
     void start();
     void imgui();
     [[nodiscard]] int zIndex() const;
     void saveState(proto::GameObject* serial) const;
+    static std::unique_ptr<GameObject> fromSerial(const proto::GameObject& serial);
 };
 
 template <typename T>

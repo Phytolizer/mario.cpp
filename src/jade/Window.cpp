@@ -142,6 +142,7 @@ void Window::changeScene(int scene)
     {
     case 0:
         s_currentScene = std::make_unique<LevelEditorScene>();
+        s_currentScene->loadState();
         s_currentScene->init();
         s_currentScene->start();
         break;

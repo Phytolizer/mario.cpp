@@ -11,6 +11,10 @@ LevelEditorScene::LevelEditorScene() = default;
 void LevelEditorScene::init()
 {
     m_camera = Camera{glm::vec2{-250, 0}};
+    if (m_levelLoaded)
+    {
+        return;
+    }
 
     m_spriteSheet =
         std::make_unique<SpriteSheet>(std::make_unique<Texture>("res/images/spritesheet.png"), 16, 16, 26, 0);

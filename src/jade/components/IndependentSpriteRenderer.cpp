@@ -38,13 +38,11 @@ void IndependentSpriteRenderer::saveState(proto::Component* serial) const
     color->set_green(m_color.g);
     color->set_blue(m_color.b);
     color->set_alpha(m_color.a);
-    proto::Sprite* sprite = props->mutable_sprite();
     if (m_sprite != nullptr && m_sprite->getTexture() != nullptr)
     {
+        proto::Sprite* sprite = props->mutable_sprite();
         proto::Texture* tex = sprite->mutable_texture();
         tex->set_filepath(std::string{m_sprite->getTexture()->getFilePath()});
-        tex->set_width(m_sprite->getTexture()->getWidth());
-        tex->set_height(m_sprite->getTexture()->getHeight());
         for (const auto& texCoord : m_sprite->getTexCoords())
         {
             proto::Vec2* t = sprite->add_texcoords();

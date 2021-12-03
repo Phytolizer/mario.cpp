@@ -52,6 +52,17 @@ void GameObject::saveState(proto::GameObject* serial) const
     }
 }
 
+std::unique_ptr<GameObject> GameObject::fromSerial(const proto::GameObject& serial)
+{
+    auto result =
+        std::make_unique<GameObject>(serial.name(), Transform::fromSerial(serial.transform()), serial.zindex());
+    for (int i = 0; i < serial.components_size(); ++i)
+    {
+        result->emplaceComponent(Component::fromSerial(serial.components()[i], result.get()));
+    }
+    return result;
+}
+
 void GameObject::imgui()
 {
     for (auto& c : m_components)

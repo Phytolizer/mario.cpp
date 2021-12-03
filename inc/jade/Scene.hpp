@@ -14,6 +14,7 @@ struct Scene
     Camera m_camera;
     std::vector<std::unique_ptr<GameObject>> m_gameObjects;
     Renderer m_renderer;
+    bool m_levelLoaded = false;
     GameObject* activeGameObject = nullptr;
 
   public:
@@ -30,5 +31,6 @@ struct Scene
     Camera& getCamera();
     void sceneImgui();
     virtual void imgui();
+    void loadState();
     void saveState();
 };

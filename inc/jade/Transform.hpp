@@ -20,4 +20,5 @@ class Transform
     }
 
     void saveState(proto::Transform* serial) const;
+    static Transform fromSerial(const proto::Transform& serial);
 };

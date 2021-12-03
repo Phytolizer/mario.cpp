@@ -25,3 +25,9 @@ void Transform::saveState(proto::Transform* serial) const
     sc->set_x(scale.x);
     sc->set_y(scale.y);
 }
+
+Transform Transform::fromSerial(const proto::Transform& serial)
+{
+    return Transform{glm::vec2{serial.position().x(), serial.position().y()},
+                     glm::vec2{serial.scale().x(), serial.scale().y()}};
+}
