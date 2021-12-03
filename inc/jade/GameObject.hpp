@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Level.pb.h"
 #include "jade/Component.hpp"
 #include "jade/ComponentClass.hpp"
 #include "jade/Transform.hpp"
@@ -31,6 +32,7 @@ class GameObject
     void start();
     void imgui();
     [[nodiscard]] int zIndex() const;
+    void saveState(proto::GameObject* serial) const;
 };
 
 template <typename T>

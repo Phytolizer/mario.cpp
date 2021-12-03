@@ -77,7 +77,9 @@ add_custom_command(
 
 add_library("jade_proto" "${PROJECT_BINARY_DIR}/proto/Level.pb.cc")
 target_include_directories("jade_proto" PUBLIC "${PROJECT_BINARY_DIR}/proto")
-target_link_libraries("jade_proto" PUBLIC "protobuf::libprotobuf")
+target_link_libraries(
+    "jade_proto" PUBLIC "protobuf::libprotoc" "protobuf::libprotobuf"
+)
 
 add_library(
     "jade"
@@ -118,6 +120,8 @@ target_link_libraries(
            "jade_proto"
            "stb"
            "util"
+           "protobuf::libprotoc"
+           "protobuf::libprotobuf"
 )
 
 add_library("physics" "src/physics/whatever.cpp")

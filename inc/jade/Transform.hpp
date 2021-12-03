@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Level.pb.h>
 #include <glm/vec2.hpp>
 
 class Transform
@@ -17,4 +18,6 @@ class Transform
     {
         return position == other.position && scale == other.scale;
     }
+
+    void saveState(proto::Transform* serial) const;
 };

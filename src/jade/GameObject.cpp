@@ -41,6 +41,17 @@ int GameObject::zIndex() const
     return m_zIndex;
 }
 
+void GameObject::saveState(proto::GameObject* serial) const
+{
+    serial->set_name(m_name);
+    serial->set_zindex(m_zIndex);
+    transform.saveState(serial->mutable_transform());
+    for (const auto& component : m_components)
+    {
+        component->saveState(serial->add_components());
+    }
+}
+
 void GameObject::imgui()
 {
     for (auto& c : m_components)

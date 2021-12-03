@@ -1,4 +1,6 @@
 #include "jade/Scene.hpp"
+#include <Level.pb.h>
+#include <fstream>
 #include <imgui.h>
 
 Scene::Scene() : m_isRunning(false), m_camera(glm::vec2{})
@@ -52,4 +54,16 @@ void Scene::sceneImgui()
 
 void Scene::imgui()
 {
+}
+
+void Scene::saveState()
+{
+    proto::Level level;
+    for (const auto& go : m_gameObjects)
+    {
+        proto::GameObject* serial = level.add_gameobjects();
+        go->saveState(serial);
+    }
+    std::ofstream out{"level.pb", std::ios::out | std::ios::trunc | std::ios::binary};
+    level.SerializeToOstream(&out);
 }

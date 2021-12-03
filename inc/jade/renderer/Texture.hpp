@@ -15,6 +15,7 @@ class Texture
 
     void bind();
     void unbind();
+    [[nodiscard]] std::string_view getFilePath() const;
     [[nodiscard]] int getWidth() const;
     [[nodiscard]] int getHeight() const;
 };

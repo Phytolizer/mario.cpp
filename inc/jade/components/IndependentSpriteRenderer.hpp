@@ -11,6 +11,8 @@ class IndependentSpriteRenderer : public SpriteRenderer
     IndependentSpriteRenderer(GameObject* go, std::unique_ptr<Sprite> sprite);
     [[nodiscard]] Texture* getTexture() override;
     [[nodiscard]] const std::vector<glm::vec2>& getTexCoords() const override;
+    void saveState(proto::Component* serial) const override;
 };
 
-static_assert(std::is_constructible_v<IndependentSpriteRenderer, GameObject*, std::unique_ptr<Sprite>>, "IndependentSpriteRenderer is not constructible");
+static_assert(std::is_constructible_v<IndependentSpriteRenderer, GameObject*, std::unique_ptr<Sprite>>,
+              "IndependentSpriteRenderer is not constructible");

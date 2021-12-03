@@ -10,10 +10,10 @@
 
 class SpriteRenderer : public Component
 {
-    glm::vec4 m_color;
     Transform m_lastTransform;
 
   protected:
+    glm::vec4 m_color;
     bool m_isDirty;
 
     explicit SpriteRenderer(GameObject* go);

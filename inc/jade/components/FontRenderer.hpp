@@ -9,4 +9,5 @@ class FontRenderer : public Component
     bool hasClass(ComponentClass cls) override;
     void start() override;
     void update(float dt) override;
+    void saveState(proto::Component* serial) const override;
 };

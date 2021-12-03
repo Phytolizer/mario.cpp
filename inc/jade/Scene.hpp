@@ -30,4 +30,5 @@ struct Scene
     Camera& getCamera();
     void sceneImgui();
     virtual void imgui();
+    void saveState();
 };

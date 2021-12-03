@@ -23,3 +23,7 @@ void FontRenderer::start()
 void FontRenderer::update(float dt)
 {
 }
+
+void FontRenderer::saveState(proto::Component* serial) const
+{
+}

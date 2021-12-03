@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Level.pb.h"
 #include "jade/ComponentClass.hpp"
 #include <memory>
 #include <stdexcept>
@@ -18,4 +19,5 @@ class Component
     virtual void update(float dt);
     virtual bool hasClass(ComponentClass cls) = 0;
     virtual void imgui();
+    virtual void saveState(proto::Component* serial) const = 0;
 };

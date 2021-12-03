@@ -132,6 +132,8 @@ void Window::loop()
         dt = endTime - beginTime;
         beginTime = endTime;
     }
+
+    s_currentScene->saveState();
 }
 
 void Window::changeScene(int scene)
