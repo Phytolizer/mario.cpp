@@ -66,6 +66,18 @@ add_library(
 target_include_directories("util" PUBLIC "${PROJECT_SOURCE_DIR}/inc")
 target_link_libraries("util" PUBLIC "pcre2-8" "fmt")
 
+add_custom_command(
+    OUTPUT "${PROJECT_BINARY_DIR}/proto/Level.pb.cc"
+    COMMAND "${CMAKE_COMMAND}" -E make_directory "${PROJECT_BINARY_DIR}/proto"
+    COMMAND
+        "${Protobuf_PROTOC_EXECUTABLE}" --cpp_out="${PROJECT_BINARY_DIR}/proto"
+        --proto_path="${PROJECT_SOURCE_DIR}/res/proto" "Level.proto"
+)
+
+add_library("jade_proto" "${PROJECT_BINARY_DIR}/proto/Level.pb.cc")
+target_include_directories("jade_proto" PUBLIC "${PROJECT_BINARY_DIR}/proto")
+target_link_libraries("jade_proto" PUBLIC "protobuf::libprotobuf")
+
 add_library(
     "jade"
     "src/jade/Camera.cpp"
@@ -102,7 +114,7 @@ target_link_libraries(
            "glfw"
            "glm"
            "imgui"
-           "protobuf::libprotobuf"
+           "jade_proto"
            "stb"
            "util"
 )

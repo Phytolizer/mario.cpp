@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+message Color
+{
+    float red = 1;
+    float green = 2;
+    float blue = 3;
+    float alpha = 4;
+}
+
+message Vec2
+{
+    float x = 1;
+    float y = 2;
+}
+
+message Texture
+{
+    string filepath = 1;
+    int32 texId = 2;
+    int32 width = 3;
+    int32 height = 4;
+}
+
+message Sprite
+{
+    Texture texture = 1;
+    repeated Vec2 texCoords = 2;
+}
+
+message ComponentProperties
+{
+    Color color = 1;
+    Sprite sprite = 2;
+}
+
+message Component
+{
+    string type = 1;
+    ComponentProperties properties = 2;
+}
+
+message Transform
+{
+    Vec2 position = 1;
+    Vec2 scale = 2;
+}
+
+message GameObject
+{
+    string name = 1;
+    repeated Component components = 2;
+    Transform transform = 3;
+    int32 zIndex = 4;
+}
+
+message Level
+{
+    repeated GameObject gameObjects = 1;
+}
